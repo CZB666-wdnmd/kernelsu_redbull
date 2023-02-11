@@ -48,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: boot_image
-          path: "/home/runner/new_boot.img"
+          path: "/home/runner/new-boot.img"
