@@ -31,7 +31,7 @@ jobs:
           git clone https://github.com/CZB666-wdnmd/kernelsu_redbull
           if [ -e /home/runner/kernelsu_redbull/kernel ]
           then
-            mkdir /home/runner/android-kernel/out/k/dist/Image.lz4-dtb 
+            mkdir -p /home/runner/android-kernel/out/k/dist
             cp /home/runner/kernelsu_redbull/kernel /home/runner/android-kernel/out/*/dist/Image.lz4-dtb 
           else
             mkdir android-kernel && cd android-kernel
