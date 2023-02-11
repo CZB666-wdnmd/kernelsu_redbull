@@ -23,15 +23,20 @@ jobs:
       - name: Build
         run: |
           cd /home/runner
+          echo 'Preparing packages'
           sudo apt-get update -y
           sudo apt-get upgrade -y
           sudo apt-get install -y repo git
+          echo 'cloning itself'
           git clone https://github.com/CZB666-wdnmd/kernelsu_redbull
           mkdir android-kernel && cd android-kernel
+          echo 'pulling kernel source'
           repo init -u https://android.googlesource.com/kernel/manifest -b android-msm-redbull-4.19-android13-qpr1
           repo sync
           cd private/msm-google
+          echo 'cloning kernelsu'
           git clone https://github.com/tiann/KernelSU
+          echo 'patching files'
           ln -sf "/home/runner/android-kernel/private/msm-google/KernelSU/kernel" "/home/runner/android-kernel/private/msm-google/drivers/kernelsu"
           echo "obj-y += kernelsu/" >> /home/runner/android-kernel/private/msm-google/drivers/Makefile
           cp /home/runner/kernelsu_redbull/ksu.c /home/runner/android-kernel/private/msm-google/KernelSU/kernel/ksu.c
@@ -40,7 +45,11 @@ jobs:
           cp /home/runner/kernelsu_redbull/read_write.c /home/runner/android-kernel/private/msm-google/fs/read_write.c
           cp /home/runner/kernelsu_redbull/stat.c /home/runner/android-kernel/private/msm-google/fs/stat.c
           cd /home/runner/android-kernel
-          ./build_redbull-gki.sh
+          echo 'start building'
+          ./build_redbull-gki.sh &
+          sleep 45m
+          echo 'finished'
+          echo 'packing boot.img'
           cp /home/runner/android-kernel/out/*/dist/Image.lz4-dtb /home/runner/kernel
           cp /home/runner/kernelsu_redbull/ramdisk.cpio /home/runner/ramdisk.cpio
           cp /home/runner/kernelsu_redbull/boot.img /home/runner/boot.img
