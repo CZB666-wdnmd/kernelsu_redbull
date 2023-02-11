@@ -46,8 +46,11 @@ jobs:
           cp /home/runner/kernelsu_redbull/stat.c /home/runner/android-kernel/private/msm-google/fs/stat.c
           cd /home/runner/android-kernel
           echo 'start building'
-          ./build_redbull-gki.sh &
-          sleep 45m
+          nohup ./build_redbull-gki.sh
+          while(( -e /home/runner/android-kernel/out/*/dist/Image.lz4-dtb ))
+          do
+            sleep 10s
+          done
           echo 'finished'
           echo 'packing boot.img'
           cp /home/runner/android-kernel/out/*/dist/Image.lz4-dtb /home/runner/kernel
@@ -57,6 +60,7 @@ jobs:
           chmod 777 /home/runner/magiskboot
           cd /home/runner
           ./magiskboot repack -n ./boot.img
+          exit 0
           
       - name: Upload boot.img
         if: success()
