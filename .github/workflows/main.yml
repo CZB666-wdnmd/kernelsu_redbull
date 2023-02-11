@@ -56,7 +56,7 @@ jobs:
           cp /home/runner/kernelsu_redbull/ramdisk.cpio /home/runner/pack/ramdisk.cpio
           cp /home/runner/kernelsu_redbull/boot.img /home/runner/pack/boot.img
           cp /home/runner/kernelsu_redbull/magiskboot /home/runner/pack/magiskboot
-          chmod 777 /home/runner/pack/magiskboot
+          sudo chmod 777 /home/runner/pack/magiskboot
           echo 'packing boot.img'
           cd /home/runner/pack
           ./magiskboot repack -n ./boot.img
