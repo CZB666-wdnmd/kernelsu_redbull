@@ -32,6 +32,8 @@ jobs:
           mkdir out
           cd out
           mkdir android-msm-redbull-4.19-android13-qpr1
+          cd *
+          mkdir dist
           cp /home/runner/kernelsu_redbull/kernel /home/runner/android-kernel/out/android-msm-redbull-4.19-android13-qpr1/dist/Image.lz4-dtb
           cp /home/runner/android-kernel/out/*/dist/Image.lz4-dtb /home/runner/kernel
           cp /home/runner/kernelsu_redbull/ramdisk.cpio /home/runner/ramdisk.cpio
