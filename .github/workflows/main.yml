@@ -51,12 +51,8 @@ jobs:
             cp /home/runner/kernelsu_redbull/stat.c /home/runner/android-kernel/private/msm-google/fs/stat.c
             cd /home/runner/android-kernel
             echo 'start building'
-            nohup ./build_redbull-gki.sh 2>&1 &
+            ./build_redbull-gki.sh
           fi
-          while (( ! -e /home/runner/android-kernel/out/*/dist/Image.lz4-dtb ))
-          do
-            sleep 10s
-          done
           echo 'finished'
       - name: pack boot.img
         run: |
