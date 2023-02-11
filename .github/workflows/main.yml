@@ -34,22 +34,22 @@ jobs:
           git clone https://github.com/tiann/KernelSU
           ln -sf "/home/runner/android-kernel/private/msm-google/KernelSU/kernel" "/home/runner/android-kernel/private/msm-google/drivers/kernelsu"
           echo "obj-y += kernelsu/" >> /home/runner/android-kernel/private/msm-google/drivers/Makefile
-          cp ~/kernelsu_redbull/ksu.c /home/runner/android-kernel/private/msm-google/KernelSU/kernel/ksu.c
-          cp ~/kernelsu_redbull/open.c /home/runner/android-kernel/private/msm-google/fs/open.c
-          cp ~/kernelsu_redbull/exec.c /home/runner/android-kernel/private/msm-google/fs/exec.c
-          cp ~/kernelsu_redbull/read_write.c /home/runner/android-kernel/private/msm-google/fs/read_write.c
-          cp ~/kernelsu_redbull/stat.c /home/runner/android-kernel/private/msm-google/fs/stat.c
+          cp /home/runner/kernelsu_redbull/ksu.c /home/runner/android-kernel/private/msm-google/KernelSU/kernel/ksu.c
+          cp /home/runner/kernelsu_redbull/open.c /home/runner/android-kernel/private/msm-google/fs/open.c
+          cp /home/runner/kernelsu_redbull/exec.c /home/runner/android-kernel/private/msm-google/fs/exec.c
+          cp /home/runner/kernelsu_redbull/read_write.c /home/runner/android-kernel/private/msm-google/fs/read_write.c
+          cp /home/runner/kernelsu_redbull/stat.c /home/runner/android-kernel/private/msm-google/fs/stat.c
           cd /home/runner/android-kernel
           ./build_redbull-gki.sh
-          mkdir ~/pack
-          cd ~/pack
-          cp ~/kernelsu_redbull/magiskboot ~/pack/magiskboot
-          chmod 777 ~/pack/magiskboot
-          cp ~/android-kernel/out/android-msm-pixel-4.19/dist/boot.img ~/pack/boot.img
+          mkdir /home/runner/pack
+          cd /home/runner/pack
+          cp /home/runner/kernelsu_redbull/magiskboot /home/runner/pack/magiskboot
+          chmod 777 /home/runner/pack/magiskboot
+          cp /home/runner/android-kernel/out/android-msm-pixel-4.19/dist/boot.img /home/runner/pack/boot.img
           ./magiskboot unpack -n ./boot.img
           rm -rf ./boot.img ./ramdisk.cpio
           mv ./kernel ./kernel_n
-          cp ~/kernelsu_redbull/boot.img ~/pack/boot.img
+          cp /home/runner/kernelsu_redbull/boot.img /home/runner/pack/boot.img
           ./magiskboot unpack -n ./boot.img
           rm -rf ./kernel
           mv ./kernel_n ./kernel
