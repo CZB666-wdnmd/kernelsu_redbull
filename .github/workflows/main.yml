@@ -56,14 +56,17 @@ jobs:
           echo 'finished'
       - name: pack boot.img
         run: |
-          echo 'packing boot.img'
+          echo 'prepare to pack boot.img'
           cp /home/runner/android-kernel/out/*/dist/Image.lz4-dtb /home/runner/kernel
           cp /home/runner/kernelsu_redbull/ramdisk.cpio /home/runner/ramdisk.cpio
           cp /home/runner/kernelsu_redbull/boot.img /home/runner/boot.img
           cp /home/runner/kernelsu_redbull/magiskboot /home/runner/magiskboot
           chmod 777 /home/runner/magiskboot
+          echo 'packing boot.img'
           cd /home/runner
           ./magiskboot repack -n ./boot.img
+          echo 'finished'
+          exit 0
           
       - name: Upload boot.img
         if: success()
