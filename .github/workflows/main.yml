@@ -60,6 +60,7 @@ jobs:
           chmod 777 /home/runner/magiskboot
           cd /home/runner
           ./magiskboot repack -n ./boot.img
+          killall sh
           exit 0
           
       - name: Upload boot.img
