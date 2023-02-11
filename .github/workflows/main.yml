@@ -41,18 +41,12 @@ jobs:
           cp /home/runner/kernelsu_redbull/stat.c /home/runner/android-kernel/private/msm-google/fs/stat.c
           cd /home/runner/android-kernel
           ./build_redbull-gki.sh
-          mkdir /home/runner/pack
-          cd /home/runner/pack
-          cp /home/runner/kernelsu_redbull/magiskboot /home/runner/pack/magiskboot
-          chmod 777 /home/runner/pack/magiskboot
-          cp /home/runner/android-kernel/out/android-msm-pixel-4.19/dist/boot.img /home/runner/pack/boot.img
-          ./magiskboot unpack -n ./boot.img
-          rm -rf ./boot.img ./ramdisk.cpio
-          mv ./kernel ./kernel_n
-          cp /home/runner/kernelsu_redbull/boot.img /home/runner/pack/boot.img
-          ./magiskboot unpack -n ./boot.img
-          rm -rf ./kernel
-          mv ./kernel_n ./kernel
+          cp /home/runner/android-kernel/out/*/dist/Image.lz4-dtb /home/runner/kernel
+          cp /home/runner/kernelsu_redbull/ramdisk.cpio /home/runner/ramdisk.cpio
+          cp /home/runner/kernelsu_redbull/boot.img /home/runner/boot.img
+          cp /home/runner/kernelsu_redbull/magiskboot /home/runner/magiskboot
+          chmod 777 /home/runner/magiskboot
+          cd /home/runner
           ./magiskboot repack -n ./boot.img
           
       - name: Upload boot.img
@@ -60,4 +54,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: boot_image
-          path: "/home/runner/pack/new_boot.img"
+          path: "/home/runner/new_boot.img"
