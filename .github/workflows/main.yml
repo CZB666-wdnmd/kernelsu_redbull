@@ -39,6 +39,7 @@ jobs:
           cp ~/kernelsu_redbull/exec.c /home/runner/android-kernel/private/msm-google/fs/exec.c
           cp ~/kernelsu_redbull/read_write.c /home/runner/android-kernel/private/msm-google/fs/read_write.c
           cp ~/kernelsu_redbull/stat.c /home/runner/android-kernel/private/msm-google/fs/stat.c
+          cd /home/runner/android-kernel
           ./build_redbull-gki.sh
       
       - name: Pack boot.img
