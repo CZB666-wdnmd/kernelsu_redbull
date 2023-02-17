@@ -58,10 +58,13 @@ jobs:
           cp /home/runner/kernelsu_redbull/boot.img /home/runner/pack/boot.img
           cp /home/runner/kernelsu_redbull/magiskboot /home/runner/pack/magiskboot
           sudo chmod 777 /home/runner/pack/magiskboot
+          sudo chmod 777 /home/runner/pack/*
           echo 'packing boot.img'
           cd /home/runner/pack
           ls /home/runner/pack
-          ./magiskboot repack -n ./boot.img
+          nohup ./magiskboot repack -n ./boot.img &
+          ps -aux | grep "magiskboot" 
+          sleep 5s
           echo 'finished'
           
       - name: Upload boot.img
