@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v1
 
       # Runs a single command using the runners shell
-      - name: Build
+      - name: Preparing
         run: |
           cd /home/runner
           echo 'Preparing packages'
@@ -44,10 +44,12 @@ jobs:
           cp /home/runner/kernelsu_redbull/exec.c /home/runner/android-kernel/private/msm-google/fs/exec.c
           cp /home/runner/kernelsu_redbull/read_write.c /home/runner/android-kernel/private/msm-google/fs/read_write.c
           cp /home/runner/kernelsu_redbull/stat.c /home/runner/android-kernel/private/msm-google/fs/stat.c
+          cp /home/runner/kernelsu_redbull/input.c /home/runner/android-kernel/private/msm-google/drivers/input/input.c
           cd /home/runner/android-kernel
-          echo 'start building'
+      - name: Build
+        run: |
+          cd /home/runner/android-kernel
           ./build_redbull-gki.sh
-          echo 'finished'
       - name: pack boot.img
         run: |
           echo 'prepare to pack boot.img'
@@ -59,6 +61,7 @@ jobs:
           sudo chmod 777 /home/runner/pack/magiskboot
           echo 'packing boot.img'
           cd /home/runner/pack
+          ls /home/runner/pack
           ./magiskboot repack -n ./boot.img
           echo 'finished'
           
