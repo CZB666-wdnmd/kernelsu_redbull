@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: build_kernelsu_on_redbull
+name: build_kernelsu_for_redbull
 
 # Controls when the workflow will run
 on:
@@ -49,27 +49,10 @@ jobs:
         run: |
           cd /home/runner/android-kernel
           ./build_redbull-gki.sh
-      - name: pack boot.img
-        run: |
-          echo 'prepare to pack boot.img'
-          mkdir /home/runner/pack
-          cp /home/runner/android-kernel/out/android-msm-pixel-4.19/dist/Image.lz4-dtb /home/runner/pack/kernel
-          cp /home/runner/kernelsu_redbull/ramdisk.cpio /home/runner/pack/ramdisk.cpio
-          cp /home/runner/kernelsu_redbull/boot.img /home/runner/pack/boot.img
-          cp /home/runner/kernelsu_redbull/magiskboot /home/runner/pack/magiskboot
-          sudo chmod 777 /home/runner/pack/magiskboot
-          sudo chmod 777 /home/runner/pack/*
-          echo 'packing boot.img'
-          cd /home/runner/pack
-          ls /home/runner/pack
-          nohup ./magiskboot repack -n ./boot.img &
-          ps -aux | grep "magiskboot" 
-          sleep 5s
-          echo 'finished'
           
-      - name: Upload boot.img
+      - name: Upload kernel
         if: success()
         uses: actions/upload-artifact@v3
         with:
-          name: boot_image
-          path: "/home/runner/pack/new-boot.img"
+          name: Image.lz4-dtb
+          path: "/home/runner/android-kernel/out/android-msm-pixel-4.19/dist/Image.lz4-dtb"
