@@ -6,7 +6,5 @@ I will provide the boot.img but i cannot make sure it can run.
 You can download it from release and then flash it.  
 Or you can build it yourself by following the workflow file.  
 ## Something may important  
-exec.c open.c read_write.c stat.c are from kernel source and modded to work with ksu(because kprobe seems doesnt work)  
-magiskboot is from [topjohnwu](https://github.com/topjohnwu)/[Magisk](https://github.com/topjohnwu/Magisk) [Releases](https://github.com/topjohnwu/Magisk/releases)v25.2  
-boot.img and ramdisk.cpio is from "redfin" for Pixel 5 [Factory Images for Nexus and Pixel Devices](https://developers.google.com/android/images) and use magiskboot to extract ramdisk.cpio  
+exec.c open.c read_write.c stat.c input.c are from kernel source and modded to work with ksu(because kprobe seems doesnt work)  
 ksu.c is from KernelSU and remove kprobe check  
